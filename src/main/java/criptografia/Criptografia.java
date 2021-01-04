@@ -15,6 +15,8 @@ public class Criptografia {
         String palabra;
         int opcion;
         boolean repetir = true;
+        char [] vocales = {'u','o','i','e','a'};
+        String invertida = "";
         Scanner teclado = new Scanner(System.in);
         do{
         System.out.println("¿Que desea hacer?\n"
@@ -28,6 +30,12 @@ public class Criptografia {
                     System.out.println("Tu elección: 1");
                     System.out.println("Introduzca la palabra a cifrar");
                     palabra = teclado.next();
+		for (int indice = palabra.length() - 1; indice >= 0; indice--) {
+			// Y vamos concatenando cada carácter a la nueva cadena
+			invertida += palabra.charAt(indice);
+		}
+		System.out.println("Imagen especular: " + invertida);
+		
                     
                     break;
                 case 2:
