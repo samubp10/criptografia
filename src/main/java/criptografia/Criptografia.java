@@ -25,6 +25,7 @@ public class Criptografia {
         String invertida = "";
         Scanner teclado = new Scanner(System.in);
         do {
+            //Menú de opciones
             System.out.println("¿Que desea hacer?\n"
                     + "1.- Cifrar\n"
                     + "2.- Descifrar\n"
@@ -33,6 +34,8 @@ public class Criptografia {
 
             switch (opcion) {
                 case 1:
+                    //La elección 1 en la que el usuario introduce una palabra y 
+                    //se encripta
                     System.out.println("Tu elección: 1");
                     System.out.println("Introduzca la palabra a cifrar");
                     palabra = teclado.next();
@@ -57,35 +60,50 @@ public class Criptografia {
                     invertida = letraDelantera + invertida + letraTrasera;
                     invertida = invertida.replace('u', '1').replace('o', '2')
                             .replace('i', '3').replace('e', '4').replace('a', '5');
-                    System.out.println("Cadena cifrada: "+invertida);
+                    System.out.println("Cadena cifrada: " + invertida);
+                    invertida = "";
+                    palabra = "";
                     break;
                 case 2:
+                    invertida = "";
+                    //Esta es la opción 2, donde el usuario introduce una palabra ya encriptada y el
+                    //programa lo desencripta
                     System.out.println("Tu elección: 2");
                     System.out.println("Introduzca una palabra");
                     palabra = teclado.next();
                     //Cadena cifrada
-                    String str[] = palabra.split(",");
+                    //Creo una arraylist de char.
                     List<Character> encriptada = new ArrayList<>();
-                    for (char ch : palabra.toCharArray()) {
-                        encriptada.add(ch);
+                    //Recorro el array de palabra con un for each recorre con el cuál
+                    //voy metiendo cada valor del array (String) palabra en encriptada
+                    for (char recorrer : palabra.toCharArray()) {
+                        encriptada.add(recorrer);
                     }
-                    int primero = 0;
-                    encriptada.remove(primero);
+                    //Elimina el valor que esté en la posición 0 (es decir el primero)
+                    encriptada.remove(0);
+                    //Elimina el último valor del array encriptada
                     int ultimo = encriptada.size() - 1;
                     encriptada.remove(ultimo);
-                    String palabraEncriptada = encriptada.stream().map(Object::toString)
-                            .collect(Collectors.joining(""));
-                    System.out.println("Cadena cifrada: "+palabraEncriptada);
-                    //Sustitución de vocales.
-                     palabraEncriptada = palabraEncriptada.replace('1', 'u').replace('2', 'o')
+                    //Creo un string para meter el arraylist de encriptada
+                    String palabraEncriptada = new String();
+                    for (char letra : encriptada) {
+                        palabraEncriptada += letra;
+                    }
+
+                    System.out.println("Cadena cifrada: " + palabraEncriptada);
+                    //Sustitución de vocales. Sustituyo en este caso los números de la izquierda
+                    //por la vocal de la derecha
+                    palabraEncriptada = palabraEncriptada.replace('1', 'u').replace('2', 'o')
                             .replace('3', 'i').replace('4', 'e').replace('5', 'a');
-                     System.out.println("Sustitución de vocales: " + palabraEncriptada);
-                     //Cadena descifrada
-                      for (int indice = palabraEncriptada.length() - 1; indice >= 0; indice--) {
+                    System.out.println("Sustitución de vocales: " + palabraEncriptada);
+                    //Cadena descifrada, recorro el array de palabraEncriptada al revés para 
+                    //colocar las letras al revés.
+                    for (int indice = palabraEncriptada.length() - 1; indice >= 0; indice--) {
                         // Y vamos concatenando cada carácter a la nueva cadena
                         invertida += palabraEncriptada.charAt(indice);
                     }
                     System.out.println("Cadena descifrada: " + invertida);
+                    palabra = "";
                     break;
                 case 3:
                     System.out.println("Tu elección: 3");
