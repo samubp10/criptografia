@@ -35,7 +35,7 @@ public class Criptografia {
             switch (opcion) {
                 case 1:
                     palabra = "";
-                    invertida="";
+                    invertida = "";
                     //La elección 1 en la que el usuario introduce una palabra y 
                     //se encripta
                     System.out.println("Tu elección: 1");
